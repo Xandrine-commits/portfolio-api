@@ -10,8 +10,10 @@ RUN dotnet publish "Portfolio.Api.csproj" -c Release -o /app/publish /p:UseAppHo
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
+ENV ASPNETCORE_URLS=http://0.0.0.0:10000
+
 COPY --from=build /app/publish .
 
-EXPOSE 8080
+EXPOSE 10000
 
 ENTRYPOINT ["dotnet", "Portfolio.Api.dll"]
